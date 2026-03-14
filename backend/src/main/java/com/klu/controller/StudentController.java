@@ -1,0 +1,35 @@
+package com.klu.controller;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.klu.model.Student;
+import com.klu.service.StudentService;
+
+@RestController
+@RequestMapping("/api/students")
+@CrossOrigin("*")
+public class StudentController {
+
+    @Autowired
+    private StudentService studentService;
+
+    @GetMapping
+    public List<Student> getStudents() {
+        return studentService.getAllStudents();
+    }
+
+    @PostMapping
+    public Student createStudent(@RequestBody Student student) {
+        return studentService.addStudent(student);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return "Student deleted successfully";
+    }
+}
