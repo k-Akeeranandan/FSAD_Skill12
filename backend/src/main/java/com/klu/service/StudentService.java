@@ -25,6 +25,14 @@ public class StudentService {
         return studentRepository.save(student);
     }
 
+    // Update a student
+    public Student updateStudent(Student student) {
+        if (!studentRepository.existsById(student.getId())) {
+            throw new RuntimeException("Student not found");
+        }
+        return studentRepository.save(student);
+    }
+
     // Delete a student
     public void deleteStudent(Long id) {
         studentRepository.deleteById(id);
